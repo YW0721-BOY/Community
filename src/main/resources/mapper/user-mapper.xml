@@ -7,6 +7,10 @@
     <sql id="selectFields">
         id,username,password,salt,email,type,status,activation_code,header_url,create_time
     </sql>
+    <insert id="insertUser">
+        insert into user (<include refid="selectFields"></include>)
+        values (#{id},#{username},#{password},#{salt},#{email},#{type},#{status},#{activationCode},#{headerUrl},#{createTime})
+    </insert>
     <select id="selectUserById" resultType="com.nowcoder.community.entity.User">
         select <include refid="selectFields"></include>
         from user
@@ -18,5 +22,10 @@
         from user
         where username=#{username}
 
+    </select>
+    <select id="selectUserByEmail" resultType="com.nowcoder.community.entity.User">
+        select <include refid="selectFields"></include>
+        from user
+        where email=#{email}
     </select>
 </mapper>
